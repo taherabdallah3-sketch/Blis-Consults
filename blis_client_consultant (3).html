@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BLIS — Design Consultant</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FAF7F3;font-family:'Georgia',serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
+:root{
+  --clay:#C4956A;
+  --dark:#1C1612;
+  --warm:#F5EFE6;
+  --mid:#8B6F52;
+  --border:#D4C4B0;
+}
+.wrap{width:100%;max-width:480px;margin:0 auto;padding:0 0 60px}
+.header{background:var(--dark);padding:28px 20px 22px;text-align:center}
+.logo-sub{color:var(--clay);font-size:9px;letter-spacing:5px;text-transform:uppercase;opacity:.7;margin-bottom:6px;font-family:sans-serif}
+.brand{color:#F5EFE6;font-size:20px;letter-spacing:3px;text-transform:uppercase}
+.tagline{color:var(--mid);font-size:10px;letter-spacing:1.5px;margin-top:5px;text-transform:uppercase;font-family:sans-serif}
+.body{padding:24px 16px}
+.step{display:none}
+.step.active{display:block}
+.progress-bar{height:2px;background:#E8DDD3;margin-bottom:28px;border-radius:1px}
+.progress-fill{height:100%;background:var(--clay);transition:width .4s ease;border-radius:1px}
+.step-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-family:sans-serif}
+.step-q{font-size:20px;color:var(--dark);margin-bottom:5px;line-height:1.3}
+.step-sub{font-size:13px;color:var(--mid);margin-bottom:20px;font-family:sans-serif;line-height:1.5}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.opt-btn{background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:14px 12px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;font-family:'Georgia',serif;width:100%;-webkit-appearance:none}
+.opt-btn:active{background:var(--warm)}
+.opt-btn.selected{border-color:var(--clay);border-width:1.5px;background:var(--warm)}
+.opt-icon{font-size:20px;margin-bottom:7px;display:block;color:var(--clay)}
+.opt-title{font-size:14px;font-weight:500;margin-bottom:2px;color:var(--dark);font-family:'Georgia',serif}
+.opt-desc{font-size:11px;color:var(--mid);font-family:sans-serif;line-height:1.4}
+.blis-btn{background:var(--dark);color:#F5EFE6;border:none;padding:15px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-family:sans-serif;width:100%;transition:background .15s;-webkit-appearance:none}
+.blis-btn:active{background:#2e261e}
+.blis-btn:disabled{background:#B4B2A9;cursor:not-allowed}
+.name-input{width:100%;padding:14px;border:0.5px solid var(--border);border-radius:8px;font-size:16px;font-family:'Georgia',serif;color:var(--dark);background:#fff;margin-bottom:10px;outline:none;-webkit-appearance:none}
+.name-input:focus{border-color:var(--clay)}
+.loading-wrap{text-align:center;padding:60px 0 40px}
+.loading-dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
+.dot{width:9px;height:9px;background:var(--clay);border-radius:50%;animation:pulse 1.2s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+.result-hero{background:var(--dark);border-radius:12px;padding:24px;margin-bottom:12px;text-align:center}
+.result-hero-label{color:var(--mid);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:sans-serif;margin-bottom:8px}
+.result-hero-text{color:#F5EFE6;font-size:16px;line-height:1.6;font-style:italic}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.result-card{background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:14px}
+.result-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-family:sans-serif}
+.result-value{font-size:14px;color:var(--dark);line-height:1.4}
+.cta-strip{background:var(--clay);border-radius:10px;padding:20px;margin-bottom:14px}
+.cta-text{color:#fff;font-family:sans-serif;font-size:13px;line-height:1.4;margin-bottom:12px}
+.cta-text strong{display:block;font-size:16px;margin-bottom:3px;font-family:'Georgia',serif}
+.cta-btn{background:#fff;color:var(--dark);border:none;padding:13px 20px;border-radius:7px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;text-decoration:none;display:block;text-align:center;width:100%;-webkit-appearance:none}
+.restart-btn{background:none;border:none;color:var(--mid);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;width:100%;text-align:center;margin-top:4px;padding:12px}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;background:var(--warm);border:0.5px solid var(--border);border-radius:20px;padding:4px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);font-family:sans-serif}
+.confirm-banner{background:#EAF3DE;border:0.5px solid #97C459;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#3B6D11;font-family:sans-serif;display:flex;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="logo-sub">B L I S</div>
+    <div class="brand">Better Life Innovation Studios</div>
+    <div class="tagline">By Dalia Halawani &nbsp;·&nbsp; Design Consultant</div>
+  </div>
+
+  <div class="body">
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+
+    <!-- Step 1: Project type -->
+    <div class="step active" id="s1">
+      <div class="step-label">Step 1 of 5</div>
+      <div class="step-q">Tell us about your project</div>
+      <div class="step-sub">What type of space are we designing together?</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'type','Residential apartment')">
+          <span class="opt-icon"><i class="ti ti-building"></i></span>
+          <div class="opt-title">Residential apartment</div>
+          <div class="opt-desc">Full unit or renovation</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Villa or townhouse')">
+          <span class="opt-icon"><i class="ti ti-home"></i></span>
+          <div class="opt-title">Villa or townhouse</div>
+          <div class="opt-desc">Standalone property</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Commercial space')">
+          <span class="opt-icon"><i class="ti ti-briefcase"></i></span>
+          <div class="opt-title">Commercial space</div>
+          <div class="opt-desc">Office, retail, hospitality</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Show unit')">
+          <span class="opt-icon"><i class="ti ti-star"></i></span>
+          <div class="opt-title">Show unit</div>
+          <div class="opt-desc">Developer staging</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn1" onclick="nextStep(2)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 2: Location -->
+    <div class="step" id="s2">
+      <div class="step-label">Step 2 of 5</div>
+      <div class="step-q">Where is your project?</div>
+      <div class="step-sub">BLIS works across Egypt's top destinations</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'location','6th of October')">
+          <div class="opt-title">6th of October</div>
+          <div class="opt-desc">Palm Hills, Zayed & surrounds</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','New Cairo')">
+          <div class="opt-title">New Cairo</div>
+          <div class="opt-desc">5th Settlement & surrounds</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','North Coast')">
+          <div class="opt-title">North Coast</div>
+          <div class="opt-desc">Seasonal & resort properties</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','Alexandria')">
+          <div class="opt-title">Alexandria</div>
+          <div class="opt-desc">Coastal city projects</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','Other')" style="grid-column:1/-1">
+          <div class="opt-title">Other location</div>
+          <div class="opt-desc">We'll discuss when we connect</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn2" onclick="nextStep(3)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 3: Style -->
+    <div class="step" id="s3">
+      <div class="step-label">Step 3 of 5</div>
+      <div class="step-q">What's your design style?</div>
+      <div class="step-sub">Choose the aesthetic that speaks to you most</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'style','Contemporary minimalist')">
+          <span class="opt-icon"><i class="ti ti-layout"></i></span>
+          <div class="opt-title">Contemporary minimalist</div>
+          <div class="opt-desc">Clean lines, curated details</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Modern classic')">
+          <span class="opt-icon"><i class="ti ti-crown"></i></span>
+          <div class="opt-title">Modern classic</div>
+          <div class="opt-desc">Timeless, elegant, layered</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Warm Mediterranean')">
+          <span class="opt-icon"><i class="ti ti-sun"></i></span>
+          <div class="opt-title">Warm Mediterranean</div>
+          <div class="opt-desc">Earthy tones, texture, light</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Bold contemporary')">
+          <span class="opt-icon"><i class="ti ti-palette"></i></span>
+          <div class="opt-title">Bold contemporary</div>
+          <div class="opt-desc">Statement pieces, contrast</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Not sure yet')" style="grid-column:1/-1">
+          <span class="opt-icon"><i class="ti ti-sparkles"></i></span>
+          <div class="opt-title">Not sure yet</div>
+          <div class="opt-desc">We'll help you figure it out together</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn3" onclick="nextStep(4)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 4: Scope -->
+    <div class="step" id="s4">
+      <div class="step-label">Step 4 of 5</div>
+      <div class="step-q">What are you looking for?</div>
+      <div class="step-sub">Select the service that best fits your needs</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'scope','Full fit-out with contracting follow-up')">
+          <span class="opt-icon"><i class="ti ti-tools"></i></span>
+          <div class="opt-title">Full fit-out</div>
+          <div class="opt-desc">Design, 3D, drawings & contracting follow-up</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','3D design & technical drawings')">
+          <span class="opt-icon"><i class="ti ti-3d-cube-sphere"></i></span>
+          <div class="opt-title">3D design & drawings</div>
+          <div class="opt-desc">Full 3D renders and technical drawings</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Contracting follow-up only')">
+          <span class="opt-icon"><i class="ti ti-clipboard-check"></i></span>
+          <div class="opt-title">Contracting follow-up</div>
+          <div class="opt-desc">We supervise & follow up on your contractors</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Furnishing & styling')">
+          <span class="opt-icon"><i class="ti ti-armchair"></i></span>
+          <div class="opt-title">Furnishing & styling</div>
+          <div class="opt-desc">Furniture selection & space styling</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Design consultation')" style="grid-column:1/-1">
+          <span class="opt-icon"><i class="ti ti-message-dots"></i></span>
+          <div class="opt-title">Design consultation</div>
+          <div class="opt-desc">Expert advice & direction session with Dalia</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn4" onclick="nextStep(5)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 5: Contact -->
+    <div class="step" id="s5">
+      <div class="step-label">Step 5 of 5</div>
+      <div class="step-q">Almost done</div>
+      <div class="step-sub">Who are we designing for? We'll be in touch within 24 hours.</div>
+      <input class="name-input" id="clientName" placeholder="Your name" oninput="checkName()" autocomplete="name">
+      <input class="name-input" id="clientPhone" placeholder="WhatsApp number" oninput="checkName()" type="tel" autocomplete="tel">
+      <input class="name-input" id="clientEmail" placeholder="Email address (optional)" oninput="checkName()" type="email" autocomplete="email">
+      <div id="capture-confirm" class="confirm-banner" style="display:none">
+        <i class="ti ti-check" style="font-size:16px;flex-shrink:0"></i> Details saved — Dalia's team will reach out shortly.
+      </div>
+      <button class="blis-btn" id="btn5" onclick="generateBrief()" disabled>Generate my design brief</button>
+    </div>
+
+    <!-- Loading -->
+    <div class="step" id="sLoading">
+      <div class="loading-wrap">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);font-family:sans-serif;margin-bottom:8px">BLIS</div>
+        <div style="font-size:20px;color:var(--dark)">Crafting your brief...</div>
+        <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="step" id="sResult">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);font-family:sans-serif;margin-bottom:6px">Your design brief</div>
+      <div id="result-name" style="font-size:20px;color:var(--dark);margin-bottom:20px"></div>
+      <div id="result-hero" class="result-hero"></div>
+      <div id="result-grid" class="result-grid"></div>
+      <div class="cta-strip">
+        <div class="cta-text">
+          <strong>Ready to bring this to life?</strong>
+          Dalia and the BLIS team will reach out within 24 hours.
+        </div>
+        <a class="cta-btn" href="#" onclick="openWhatsApp();return false">Message us on WhatsApp</a>
+      </div>
+      <button class="restart-btn" onclick="restart()">Start over</button>
+      <div style="text-align:center;margin-top:14px">
+        <span class="ai-badge"><i class="ti ti-sparkles" style="font-size:13px"></i> Powered by AI</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BLIS_WA='201217733329';
+const BLIS_EMAIL='taherabdallah3@gmail.com';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbx9HV2sGxtp6xyr2pq_Jjy-2tDSO9oyhsjfBB0iW6TvMCH9qTKX2cbE5RnKoyd0QLSA/exec';
+
+const state={type:'',location:'',style:'',scope:'',name:'',phone:'',email:''};
+const btnMap={2:'btn1',3:'btn2',4:'btn3',5:'btn4'};
+const progMap={1:20,2:40,3:60,4:80,5:95};
+let leadFired=false;
+let captureTimer=null;
+
+const directions={
+  'Contemporary minimalist':'"A curated space of refined restraint — where every element earns its place and quiet luxury speaks louder than decoration."',
+  'Modern classic':'"Timeless proportions meet contemporary living — elegant, layered, and built to stand the test of time."',
+  'Warm Mediterranean':'"Sunlight, texture, and warmth woven into every corner — a home that feels like it has always been lived in."',
+  'Bold contemporary':'"An interior with personality and intention — spaces that make a statement without ever feeling overdone."',
+  'Not sure yet':'"Great design starts with a conversation. Dalia will guide you to a direction that feels completely yours."'
+};
+
+function buildWAMessage(){
+  const lines=[
+    '🏠 *New BLIS Lead*',
+    '',
+    `*Name:* ${state.name}`,
+    `*Phone:* ${state.phone}`,
+    state.email ? `*Email:* ${state.email}` : null,
+    '',
+    `*Project type:* ${state.type||'Not specified'}`,
+    `*Location:* ${state.location||'Not specified'}`,
+    `*Style:* ${state.style||'Not specified'}`,
+    `*Service:* ${state.scope||'Not specified'}`,
+    '',
+    `_Submitted via BLIS Design Consultant_`
+  ].filter(l=>l!==null);
+  return encodeURIComponent(lines.join('\n'));
+}
+
+function fireLead(){
+  if(leadFired) return;
+  leadFired=true;
+  window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
+  const params=new URLSearchParams({
+    name:state.name,
+    phone:state.phone,
+    email:state.email||'',
+    type:state.type,
+    location:state.location,
+    style:state.style,
+    scope:state.scope
+  });
+  fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'}).catch(()=>{});
+  const el=document.getElementById('capture-confirm');
+  if(el) el.style.display='flex';
+}
+
+function openWhatsApp(){
+  window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
+}
+
+function pick(el,key,val){
+  const parent=el.closest('.opt-grid');
+  parent.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  state[key]=val;
+  const s=parseInt(document.querySelector('.step.active').id.replace('s',''));
+  const btn=btnMap[s+1];
+  if(btn) document.getElementById(btn).disabled=false;
+}
+
+function nextStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=progMap[n]+'%';
+  window.scrollTo(0,0);
+}
+
+function checkName(){
+  state.name=document.getElementById('clientName').value.trim();
+  state.phone=document.getElementById('clientPhone').value.trim();
+  state.email=document.getElementById('clientEmail').value.trim();
+  const ready=state.name&&state.phone;
+  document.getElementById('btn5').disabled=!ready;
+  if(ready&&!leadFired){
+    clearTimeout(captureTimer);
+    captureTimer=setTimeout(fireLead,1500);
+  }
+}
+
+function generateBrief(){
+  if(!leadFired) fireLead();
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sLoading').classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(buildResult,2000);
+}
+
+function buildResult(){
+  const dir=directions[state.style]||'"Dalia will craft a direction that is uniquely yours — tailored to your space, your life, and your vision."';
+  document.getElementById('result-name').textContent='For '+state.name+(state.location?' · '+state.location:'');
+  document.getElementById('result-hero').innerHTML=`<div class="result-hero-label">Design direction</div><div class="result-hero-text">${dir}</div>`;
+  document.getElementById('result-grid').innerHTML=`
+    <div class="result-card"><div class="result-label">Project type</div><div class="result-value">${state.type||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Location</div><div class="result-value">${state.location||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Style</div><div class="result-value">${state.style||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Service</div><div class="result-value">${state.scope||'—'}</div></div>
+  `;
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sResult').classList.add('active');
+  document.getElementById('prog').style.width='100%';
+  window.scrollTo(0,0);
+}
+
+function restart(){
+  Object.keys(state).forEach(k=>state[k]='');
+  leadFired=false;
+  clearTimeout(captureTimer);
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  ['btn1','btn2','btn3','btn4','btn5'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.disabled=true;
+  });
+  ['clientName','clientPhone','clientEmail'].forEach(id=>document.getElementById(id).value='');
+  const conf=document.getElementById('capture-confirm');
+  if(conf) conf.style.display='none';
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s1').classList.add('active');
+  document.getElementById('prog').style.width='20%';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
