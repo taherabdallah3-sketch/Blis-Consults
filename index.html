@@ -2,693 +2,380 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BLIS — Team Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BLIS — Design Consultant</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#F5F2EE;font-family:sans-serif;min-height:100vh;color:#1C1612}
+body{background:#FAF7F3;font-family:'Georgia',serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
 :root{
-  --clay:#C4956A;--dark:#1C1612;--warm:#F5EFE6;--mid:#8B6F52;--border:#D4C4B0;
-  --green:#3B6D11;--green-bg:#EAF3DE;--amber:#BA7517;--amber-bg:#FAEEDA;
-  --blue:#185FA5;--blue-bg:#E6F1FB;--red:#A32D2D;--red-bg:#FCEBEB;
+  --clay:#C4956A;
+  --dark:#1C1612;
+  --warm:#F5EFE6;
+  --mid:#8B6F52;
+  --border:#D4C4B0;
 }
-
-/* LOGIN */
-.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F5F2EE}
-.login-card{background:#fff;border:0.5px solid var(--border);border-radius:16px;padding:40px 36px;width:380px;max-width:94vw;text-align:center}
-.login-logo{color:var(--clay);font-size:9px;letter-spacing:6px;text-transform:uppercase;opacity:.8;margin-bottom:6px}
-.login-brand{color:var(--dark);font-size:20px;letter-spacing:3px;text-transform:uppercase;font-family:'Georgia',serif;margin-bottom:4px}
-.login-sub{color:var(--mid);font-size:11px;letter-spacing:1px;margin-bottom:32px}
-.login-label{font-size:11px;color:var(--mid);text-align:left;margin-bottom:6px;letter-spacing:.5px;display:block}
-.login-input{width:100%;padding:12px 14px;border:0.5px solid var(--border);border-radius:8px;font-size:14px;color:var(--dark);background:#fff;margin-bottom:14px;outline:none;font-family:sans-serif}
-.login-input:focus{border-color:var(--clay)}
-.login-btn{width:100%;background:var(--dark);color:#F5EFE6;border:none;padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-family:sans-serif;transition:background .15s;margin-top:4px}
-.login-btn:hover{background:#2e261e}
-.login-error{background:var(--red-bg);color:var(--red);font-size:12px;padding:10px 14px;border-radius:7px;margin-bottom:14px;display:none;text-align:left}
-.login-divider{height:0.5px;background:var(--border);margin:24px 0 20px}
-.login-who{font-size:11px;color:var(--mid);margin-bottom:12px}
-.login-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.login-pill{background:var(--warm);border:0.5px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--mid);cursor:pointer;transition:all .15s}
-.login-pill:hover{border-color:var(--clay);color:var(--clay)}
-
-/* APP */
-.app{display:none}
-.sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--dark);z-index:100;overflow-y:auto;display:flex;flex-direction:column}
-.main{margin-left:220px;padding:28px 32px;min-height:100vh}
-.sb-header{padding:24px 20px 18px;border-bottom:0.5px solid rgba(196,149,106,.2)}
-.sb-logo{color:var(--clay);font-size:9px;letter-spacing:5px;opacity:.7;margin-bottom:4px}
-.sb-brand{color:#F5EFE6;font-size:13px;letter-spacing:2px;text-transform:uppercase}
-.sb-user{margin-top:12px;display:flex;align-items:center;gap:8px}
-.sb-avatar{width:30px;height:30px;border-radius:50%;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0}
-.sb-user-name{color:#F5EFE6;font-size:12px;font-weight:500}
-.sb-user-role{color:var(--mid);font-size:10px;margin-top:1px}
-.sb-nav{padding:16px 0;flex:1}
-.sb-section{padding:6px 20px 4px;font-size:10px;letter-spacing:2px;color:#5F5E5A;text-transform:uppercase;margin-top:8px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:10px 20px;color:#B4B2A9;font-size:13px;cursor:pointer;transition:all .15s;border-left:2px solid transparent}
-.sb-item:hover{color:#F5EFE6;background:rgba(255,255,255,.05)}
-.sb-item.active{color:#F5EFE6;border-left-color:var(--clay);background:rgba(196,149,106,.1)}
-.sb-item i{font-size:17px}
-.sb-badge{margin-left:auto;background:var(--clay);color:#fff;font-size:10px;padding:2px 7px;border-radius:10px}
-.sb-footer{padding:16px 20px;border-top:0.5px solid rgba(196,149,106,.15)}
-.sb-logout{display:flex;align-items:center;gap:8px;color:#5F5E5A;font-size:12px;cursor:pointer;transition:color .15s}
-.sb-logout:hover{color:#B4B2A9}
-
-/* PAGE */
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.page-title{font-size:22px;font-weight:500;color:var(--dark)}
-.page-sub{font-size:13px;color:var(--mid);margin-top:3px}
-.header-actions{display:flex;gap:10px;align-items:center}
-.btn-primary{background:var(--dark);color:#F5EFE6;border:none;padding:10px 18px;font-size:12px;letter-spacing:1px;cursor:pointer;border-radius:7px;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
-.btn-primary:hover{background:#2e261e}
-.btn-ghost{background:none;border:0.5px solid var(--border);color:var(--dark);padding:9px 16px;font-size:12px;cursor:pointer;border-radius:7px;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
-.btn-ghost:hover{background:var(--warm)}
-.btn-clay{background:var(--clay);color:#fff;border:none;padding:9px 18px;font-size:12px;cursor:pointer;border-radius:7px;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
-.btn-clay:hover{background:#b0845c}
-.btn-sm{padding:6px 12px;font-size:11px}
-.btn-danger{background:var(--red-bg);color:var(--red);border:0.5px solid var(--red);padding:5px 10px;font-size:11px;cursor:pointer;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
-
-/* STATS */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.stat-card{background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:16px 18px}
-.stat-label{font-size:11px;color:var(--mid);margin-bottom:6px}
-.stat-val{font-size:26px;font-weight:500;color:var(--dark)}
-.stat-sub{font-size:11px;margin-top:4px}
-
-/* TABS */
-.tabs{display:flex;gap:2px;background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:4px;width:fit-content}
-.tab{padding:7px 16px;font-size:13px;cursor:pointer;border-radius:6px;color:var(--mid);transition:all .15s;border:none;background:none}
-.tab.active{background:var(--dark);color:#F5EFE6}
-
-/* CEO BANNER */
-.ceo-banner{background:var(--dark);border-radius:12px;padding:18px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ceo-banner-text{color:#F5EFE6;font-size:14px;line-height:1.5}
-.ceo-banner-text strong{display:block;font-size:16px;margin-bottom:2px;font-family:'Georgia',serif}
-.ceo-banner-text span{color:var(--clay)}
-
-/* PROJECTS */
-.project-card{background:#fff;border:0.5px solid var(--border);border-radius:12px;margin-bottom:14px;overflow:hidden}
-.project-header{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .15s}
-.project-header:hover{background:var(--warm)}
-.project-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:3px}
-.project-info{font-size:12px;color:var(--mid);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.progress-wrap{width:100px}
-.progress-label{font-size:11px;color:var(--mid);margin-bottom:4px;text-align:right}
-.progress-track{height:3px;background:#E8DDD3;border-radius:2px}
-.progress-fill-bar{height:100%;background:var(--clay);border-radius:2px;transition:width .3s}
-.chevron{color:var(--mid);transition:transform .2s;font-size:18px}
-.chevron.open{transform:rotate(180deg)}
-
-/* TASKS */
-.task-list{border-top:0.5px solid var(--border);display:none}
-.task-list.open{display:block}
-.task-item{display:flex;align-items:flex-start;gap:12px;padding:14px 20px;border-bottom:0.5px solid #F0E8DE}
-.task-item:hover{background:#FDFAF7}
-.task-check{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.task-check.done{background:var(--clay);border-color:var(--clay);color:#fff}
-.task-body{flex:1;min-width:0}
-.task-title{font-size:14px;color:var(--dark);margin-bottom:5px;line-height:1.35}
-.task-title.done-text{text-decoration:line-through;color:var(--mid)}
-.task-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.tag{display:inline-flex;align-items:center;font-size:11px;padding:3px 9px;border-radius:12px}
-.tag-todo{background:var(--amber-bg);color:var(--amber)}
-.tag-progress{background:var(--blue-bg);color:var(--blue)}
-.tag-done{background:var(--green-bg);color:var(--green)}
-.tag-review{background:#FBEAF0;color:#993556}
-.avatar{width:24px;height:24px;border-radius:50%;background:var(--clay);color:#fff;font-size:10px;display:inline-flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0}
-.task-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.task-file-btn{background:var(--warm);border:0.5px solid var(--border);color:var(--mid);font-size:11px;padding:5px 11px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.task-file-btn:hover{border-color:var(--clay);color:var(--clay)}
-.comment-btn{background:none;border:0.5px solid var(--border);color:var(--mid);font-size:11px;padding:5px 11px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.comment-btn:hover{background:var(--warm)}
-.file-list{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
-.file-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:0.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--dark);text-decoration:none;cursor:pointer}
-.file-chip:hover{border-color:var(--clay)}
-.file-chip i{font-size:13px;color:var(--clay)}
-.file-del{color:var(--mid);cursor:pointer;font-size:13px;margin-left:2px}
-.file-del:hover{color:var(--red)}
-.comments-wrap{margin-top:10px;background:var(--warm);border-radius:8px;padding:12px}
-.comment-item{display:flex;gap:10px;margin-bottom:10px}
-.comment-bubble{flex:1;background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:10px 12px}
-.comment-author{font-size:11px;font-weight:500;color:var(--dark);margin-bottom:3px;display:flex;align-items:center;gap:6px}
-.comment-author.is-ceo{color:var(--clay)}
-.ceo-tag{background:var(--clay);color:#fff;font-size:9px;padding:2px 7px;border-radius:10px}
-.comment-text{font-size:13px;color:var(--dark);line-height:1.5}
-.comment-time{font-size:10px;color:var(--mid);margin-top:4px}
-.comment-input-row{display:flex;gap:8px;margin-top:10px;align-items:flex-end}
-.comment-input{flex:1;padding:9px 12px;border:0.5px solid var(--border);border-radius:7px;font-size:13px;font-family:sans-serif;resize:none;outline:none;background:#fff;min-height:38px}
-.comment-input:focus{border-color:var(--clay)}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(28,22,18,.5);z-index:200;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:14px;padding:28px;width:480px;max-width:95vw}
-.modal-title{font-size:17px;font-weight:500;margin-bottom:20px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;color:var(--mid);margin-bottom:5px;letter-spacing:.5px}
-.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:0.5px solid var(--border);border-radius:7px;font-size:14px;font-family:sans-serif;color:var(--dark);background:#fff;outline:none}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--clay)}
-.field textarea{min-height:70px;resize:vertical}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
-
-/* LOADING */
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(245,242,238,.85);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px}
-.loading-overlay.show{display:flex}
-.loading-dots{display:flex;gap:7px}
+.wrap{width:100%;max-width:480px;margin:0 auto;padding:0 0 60px}
+.header{background:var(--dark);padding:28px 20px 22px;text-align:center}
+.logo-sub{color:var(--clay);font-size:9px;letter-spacing:5px;text-transform:uppercase;opacity:.7;margin-bottom:6px;font-family:sans-serif}
+.brand{color:#F5EFE6;font-size:20px;letter-spacing:3px;text-transform:uppercase}
+.tagline{color:var(--mid);font-size:10px;letter-spacing:1.5px;margin-top:5px;text-transform:uppercase;font-family:sans-serif}
+.body{padding:24px 16px}
+.step{display:none}
+.step.active{display:block}
+.progress-bar{height:2px;background:#E8DDD3;margin-bottom:28px;border-radius:1px}
+.progress-fill{height:100%;background:var(--clay);transition:width .4s ease;border-radius:1px}
+.step-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-family:sans-serif}
+.step-q{font-size:20px;color:var(--dark);margin-bottom:5px;line-height:1.3}
+.step-sub{font-size:13px;color:var(--mid);margin-bottom:20px;font-family:sans-serif;line-height:1.5}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.opt-btn{background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:14px 12px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;font-family:'Georgia',serif;width:100%;-webkit-appearance:none}
+.opt-btn:active{background:var(--warm)}
+.opt-btn.selected{border-color:var(--clay);border-width:1.5px;background:var(--warm)}
+.opt-icon{font-size:20px;margin-bottom:7px;display:block;color:var(--clay)}
+.opt-title{font-size:14px;font-weight:500;margin-bottom:2px;color:var(--dark);font-family:'Georgia',serif}
+.opt-desc{font-size:11px;color:var(--mid);font-family:sans-serif;line-height:1.4}
+.blis-btn{background:var(--dark);color:#F5EFE6;border:none;padding:15px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-family:sans-serif;width:100%;transition:background .15s;-webkit-appearance:none}
+.blis-btn:active{background:#2e261e}
+.blis-btn:disabled{background:#B4B2A9;cursor:not-allowed}
+.name-input{width:100%;padding:14px;border:0.5px solid var(--border);border-radius:8px;font-size:16px;font-family:'Georgia',serif;color:var(--dark);background:#fff;margin-bottom:10px;outline:none;-webkit-appearance:none}
+.name-input:focus{border-color:var(--clay)}
+.loading-wrap{text-align:center;padding:60px 0 40px}
+.loading-dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
 .dot{width:9px;height:9px;background:var(--clay);border-radius:50%;animation:pulse 1.2s ease-in-out infinite}
-.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
-.loading-text{font-size:13px;color:var(--mid)}
-
-.empty{text-align:center;padding:48px 20px;color:var(--mid);font-size:13px}
-.empty i{font-size:38px;display:block;margin-bottom:10px;opacity:.35}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#F5EFE6;padding:12px 18px;border-radius:8px;font-size:13px;z-index:400;display:none;align-items:center;gap:8px}
-.toast.show{display:flex}
+.result-hero{background:var(--dark);border-radius:12px;padding:24px;margin-bottom:12px;text-align:center}
+.result-hero-label{color:var(--mid);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:sans-serif;margin-bottom:8px}
+.result-hero-text{color:#F5EFE6;font-size:16px;line-height:1.6;font-style:italic}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.result-card{background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:14px}
+.result-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;font-family:sans-serif}
+.result-value{font-size:14px;color:var(--dark);line-height:1.4}
+.cta-strip{background:var(--clay);border-radius:10px;padding:20px;margin-bottom:14px}
+.cta-text{color:#fff;font-family:sans-serif;font-size:13px;line-height:1.4;margin-bottom:12px}
+.cta-text strong{display:block;font-size:16px;margin-bottom:3px;font-family:'Georgia',serif}
+.cta-btn{background:#fff;color:var(--dark);border:none;padding:13px 20px;border-radius:7px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;text-decoration:none;display:block;text-align:center;width:100%;-webkit-appearance:none}
+.restart-btn{background:none;border:none;color:var(--mid);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;width:100%;text-align:center;margin-top:4px;padding:12px}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;background:var(--warm);border:0.5px solid var(--border);border-radius:20px;padding:4px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);font-family:sans-serif}
+.confirm-banner{background:#EAF3DE;border:0.5px solid #97C459;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#3B6D11;font-family:sans-serif;display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <div class="header">
+    <div class="logo-sub">B L I S</div>
+    <div class="brand">Better Life Innovation Studios</div>
+    <div class="tagline">By Dalia Halawani &nbsp;·&nbsp; Design Consultant</div>
+  </div>
 
-<!-- LOADING -->
-<div class="loading-overlay" id="loading-overlay">
-  <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-  <div class="loading-text" id="loading-text">Loading...</div>
-</div>
+  <div class="body">
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+    <!-- Step 1: Project type -->
+    <div class="step active" id="s1">
+      <div class="step-label">Step 1 of 5</div>
+      <div class="step-q">Tell us about your project</div>
+      <div class="step-sub">What type of space are we designing together?</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'type','Residential apartment')">
+          <span class="opt-icon"><i class="ti ti-building"></i></span>
+          <div class="opt-title">Residential apartment</div>
+          <div class="opt-desc">Full unit or renovation</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Villa or townhouse')">
+          <span class="opt-icon"><i class="ti ti-home"></i></span>
+          <div class="opt-title">Villa or townhouse</div>
+          <div class="opt-desc">Standalone property</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Commercial space')">
+          <span class="opt-icon"><i class="ti ti-briefcase"></i></span>
+          <div class="opt-title">Commercial space</div>
+          <div class="opt-desc">Office, retail, hospitality</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'type','Show unit')">
+          <span class="opt-icon"><i class="ti ti-star"></i></span>
+          <div class="opt-title">Show unit</div>
+          <div class="opt-desc">Developer staging</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn1" onclick="nextStep(2)" disabled>Continue</button>
+    </div>
 
-<!-- LOGIN -->
-<div class="login-screen" id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">B L I S</div>
-    <div class="login-brand">Team Hub</div>
-    <div class="login-sub">Better Life Innovation Studios</div>
-    <div id="login-error" class="login-error"></div>
-    <label class="login-label">Your name</label>
-    <select class="login-input" id="login-name">
-      <option value="">Select your name...</option>
-      <option value="ceo">Dalia Halawani</option>
-      <option value="emp1">Employee 1</option>
-      <option value="emp2">Employee 2</option>
-      <option value="emp3">Employee 3</option>
-      <option value="emp4">Employee 4</option>
-    </select>
-    <label class="login-label">Password</label>
-    <input class="login-input" type="password" id="login-pass" placeholder="Enter your password" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="login-btn" onclick="doLogin()">Sign in</button>
-    <div class="login-divider"></div>
-    <div class="login-who">Quick access</div>
-    <div class="login-pills">
-      <span class="login-pill" onclick="quickLogin('ceo')">Dalia · CEO</span>
-      <span class="login-pill" onclick="quickLogin('emp1')">Employee 1</span>
-      <span class="login-pill" onclick="quickLogin('emp2')">Employee 2</span>
-      <span class="login-pill" onclick="quickLogin('emp3')">Employee 3</span>
-      <span class="login-pill" onclick="quickLogin('emp4')">Employee 4</span>
+    <!-- Step 2: Location -->
+    <div class="step" id="s2">
+      <div class="step-label">Step 2 of 5</div>
+      <div class="step-q">Where is your project?</div>
+      <div class="step-sub">BLIS works across Egypt's top destinations</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'location','6th of October')">
+          <div class="opt-title">6th of October</div>
+          <div class="opt-desc">Palm Hills, Zayed & surrounds</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','New Cairo')">
+          <div class="opt-title">New Cairo</div>
+          <div class="opt-desc">5th Settlement & surrounds</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','North Coast')">
+          <div class="opt-title">North Coast</div>
+          <div class="opt-desc">Seasonal & resort properties</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','Alexandria')">
+          <div class="opt-title">Alexandria</div>
+          <div class="opt-desc">Coastal city projects</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'location','Other')" style="grid-column:1/-1">
+          <div class="opt-title">Other location</div>
+          <div class="opt-desc">We'll discuss when we connect</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn2" onclick="nextStep(3)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 3: Style -->
+    <div class="step" id="s3">
+      <div class="step-label">Step 3 of 5</div>
+      <div class="step-q">What's your design style?</div>
+      <div class="step-sub">Choose the aesthetic that speaks to you most</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'style','Contemporary minimalist')">
+          <span class="opt-icon"><i class="ti ti-layout"></i></span>
+          <div class="opt-title">Contemporary minimalist</div>
+          <div class="opt-desc">Clean lines, curated details</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Modern classic')">
+          <span class="opt-icon"><i class="ti ti-crown"></i></span>
+          <div class="opt-title">Modern classic</div>
+          <div class="opt-desc">Timeless, elegant, layered</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Warm Mediterranean')">
+          <span class="opt-icon"><i class="ti ti-sun"></i></span>
+          <div class="opt-title">Warm Mediterranean</div>
+          <div class="opt-desc">Earthy tones, texture, light</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Bold contemporary')">
+          <span class="opt-icon"><i class="ti ti-palette"></i></span>
+          <div class="opt-title">Bold contemporary</div>
+          <div class="opt-desc">Statement pieces, contrast</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'style','Not sure yet')" style="grid-column:1/-1">
+          <span class="opt-icon"><i class="ti ti-sparkles"></i></span>
+          <div class="opt-title">Not sure yet</div>
+          <div class="opt-desc">We'll help you figure it out together</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn3" onclick="nextStep(4)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 4: Scope -->
+    <div class="step" id="s4">
+      <div class="step-label">Step 4 of 5</div>
+      <div class="step-q">What are you looking for?</div>
+      <div class="step-sub">Select the service that best fits your needs</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="pick(this,'scope','Full fit-out with contracting follow-up')">
+          <span class="opt-icon"><i class="ti ti-tools"></i></span>
+          <div class="opt-title">Full fit-out</div>
+          <div class="opt-desc">Design, 3D, drawings & contracting follow-up</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','3D design & technical drawings')">
+          <span class="opt-icon"><i class="ti ti-3d-cube-sphere"></i></span>
+          <div class="opt-title">3D design & drawings</div>
+          <div class="opt-desc">Full 3D renders and technical drawings</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Contracting follow-up only')">
+          <span class="opt-icon"><i class="ti ti-clipboard-check"></i></span>
+          <div class="opt-title">Contracting follow-up</div>
+          <div class="opt-desc">We supervise & follow up on your contractors</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Furnishing & styling')">
+          <span class="opt-icon"><i class="ti ti-armchair"></i></span>
+          <div class="opt-title">Furnishing & styling</div>
+          <div class="opt-desc">Furniture selection & space styling</div>
+        </button>
+        <button class="opt-btn" onclick="pick(this,'scope','Design consultation')" style="grid-column:1/-1">
+          <span class="opt-icon"><i class="ti ti-message-dots"></i></span>
+          <div class="opt-title">Design consultation</div>
+          <div class="opt-desc">Expert advice & direction session with Dalia</div>
+        </button>
+      </div>
+      <button class="blis-btn" id="btn4" onclick="nextStep(5)" disabled>Continue</button>
+    </div>
+
+    <!-- Step 5: Contact -->
+    <div class="step" id="s5">
+      <div class="step-label">Step 5 of 5</div>
+      <div class="step-q">Almost done</div>
+      <div class="step-sub">Who are we designing for? We'll be in touch within 24 hours.</div>
+      <input class="name-input" id="clientName" placeholder="Your name" oninput="checkName()" autocomplete="name">
+      <input class="name-input" id="clientPhone" placeholder="WhatsApp number" oninput="checkName()" type="tel" autocomplete="tel">
+      <input class="name-input" id="clientEmail" placeholder="Email address (optional)" oninput="checkName()" type="email" autocomplete="email">
+      <div id="capture-confirm" class="confirm-banner" style="display:none">
+        <i class="ti ti-check" style="font-size:16px;flex-shrink:0"></i> Details saved — Dalia's team will reach out shortly.
+      </div>
+      <button class="blis-btn" id="btn5" onclick="generateBrief()" disabled>Generate my design brief</button>
+    </div>
+
+    <!-- Loading -->
+    <div class="step" id="sLoading">
+      <div class="loading-wrap">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);font-family:sans-serif;margin-bottom:8px">BLIS</div>
+        <div style="font-size:20px;color:var(--dark)">Crafting your brief...</div>
+        <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="step" id="sResult">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);font-family:sans-serif;margin-bottom:6px">Your design brief</div>
+      <div id="result-name" style="font-size:20px;color:var(--dark);margin-bottom:20px"></div>
+      <div id="result-hero" class="result-hero"></div>
+      <div id="result-grid" class="result-grid"></div>
+      <div class="cta-strip">
+        <div class="cta-text">
+          <strong>Ready to bring this to life?</strong>
+          Dalia and the BLIS team will reach out within 24 hours.
+        </div>
+        <a class="cta-btn" href="#" onclick="openWhatsApp();return false">Message us on WhatsApp</a>
+      </div>
+      <button class="restart-btn" onclick="restart()">Start over</button>
+      <div style="text-align:center;margin-top:14px">
+        <span class="ai-badge"><i class="ti ti-sparkles" style="font-size:13px"></i> Powered by AI</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- APP -->
-<div class="app" id="app">
-  <div class="sidebar">
-    <div class="sb-header">
-      <div class="sb-logo">B L I S</div>
-      <div class="sb-brand">Team Hub</div>
-      <div class="sb-user">
-        <div class="avatar sb-avatar" id="sb-av"></div>
-        <div><div class="sb-user-name" id="sb-name"></div><div class="sb-user-role" id="sb-role"></div></div>
-      </div>
-    </div>
-    <div class="sb-nav">
-      <div class="sb-section">Workspace</div>
-      <div class="sb-item active" onclick="showView('projects',this)"><i class="ti ti-layout-kanban"></i> Projects <span class="sb-badge" id="badge-proj">0</span></div>
-      <div class="sb-item" onclick="showView('files',this)"><i class="ti ti-folder"></i> All files</div>
-      <div class="sb-item" onclick="showView('comments',this)"><i class="ti ti-message-circle"></i> Comments</div>
-      <div class="sb-section">Team</div>
-      <div class="sb-item" onclick="showView('team',this)"><i class="ti ti-users"></i> Team</div>
-    </div>
-    <div class="sb-footer"><div class="sb-logout" onclick="logout()"><i class="ti ti-logout" style="font-size:16px"></i> Sign out</div></div>
-  </div>
-
-  <div class="main">
-    <div id="view-projects">
-      <div class="page-header">
-        <div><div class="page-title">Projects</div><div class="page-sub">Active fit-outs and design projects</div></div>
-        <div class="header-actions">
-          <button class="btn-ghost btn-sm" onclick="toggleAddProject()"><i class="ti ti-folder-plus" style="font-size:14px"></i> New project</button>
-          <button class="btn-primary btn-sm" onclick="openTaskModal()"><i class="ti ti-plus" style="font-size:14px"></i> Add task</button>
-        </div>
-      </div>
-      <div id="ceo-banner-wrap"></div>
-      <div class="stat-row">
-        <div class="stat-card"><div class="stat-label">Active projects</div><div class="stat-val" id="stat-active">0</div><div class="stat-sub" style="color:var(--blue)">In progress</div></div>
-        <div class="stat-card"><div class="stat-label">Total tasks</div><div class="stat-val" id="stat-total">0</div><div class="stat-sub" style="color:var(--mid)">Across all projects</div></div>
-        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-val" id="stat-done">0</div><div class="stat-sub" style="color:var(--green)">Tasks done</div></div>
-        <div class="stat-card"><div class="stat-label">Pending review</div><div class="stat-val" id="stat-review">0</div><div class="stat-sub" style="color:#993556">Needs sign-off</div></div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <div class="tabs">
-          <button class="tab active" onclick="filterStatus('all',this)">All</button>
-          <button class="tab" onclick="filterStatus('in-progress',this)">In progress</button>
-          <button class="tab" onclick="filterStatus('review',this)">Review</button>
-          <button class="tab" onclick="filterStatus('done',this)">Done</button>
-        </div>
-      </div>
-      <div id="add-project-form" style="display:none;background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px">
-        <div style="font-size:14px;font-weight:500;margin-bottom:14px">New project</div>
-        <div class="field-row">
-          <div class="field"><label>Project name</label><input type="text" id="np-name" placeholder="e.g. Palm Hills — Unit 5A"></div>
-          <div class="field"><label>Client name</label><input type="text" id="np-client" placeholder="Client full name"></div>
-        </div>
-        <div style="display:flex;gap:10px;justify-content:flex-end">
-          <button class="btn-ghost btn-sm" onclick="toggleAddProject()">Cancel</button>
-          <button class="btn-primary btn-sm" onclick="createProject()">Create project</button>
-        </div>
-      </div>
-      <div id="project-list"></div>
-    </div>
-
-    <div id="view-files" style="display:none">
-      <div class="page-header"><div><div class="page-title">All files</div><div class="page-sub">Deliverables across all projects</div></div></div>
-      <div id="all-files-list"></div>
-    </div>
-
-    <div id="view-comments" style="display:none">
-      <div class="page-header"><div><div class="page-title">Comments</div><div class="page-sub">CEO notes and team feedback</div></div></div>
-      <div id="all-comments-list"></div>
-    </div>
-
-    <div id="view-team" style="display:none">
-      <div class="page-header"><div class="page-title">Team</div></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px" id="team-grid"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Task Modal -->
-<div class="modal-overlay" id="task-modal" onclick="closeTaskModalOutside(event)">
-  <div class="modal">
-    <div class="modal-title">Add new task</div>
-    <div class="field"><label>Task title</label><input type="text" id="new-title" placeholder="e.g. Finalize flooring selection"></div>
-    <div class="field"><label>Project</label><select id="new-project"></select></div>
-    <div class="field-row">
-      <div class="field"><label>Assigned to</label><select id="new-assignee">
-        <option>Dalia Halawani</option><option>Employee 1</option><option>Employee 2</option><option>Employee 3</option><option>Employee 4</option>
-      </select></div>
-      <div class="field"><label>Status</label><select id="new-status">
-        <option value="todo">To do</option><option value="in-progress">In progress</option><option value="review">Review</option><option value="done">Done</option>
-      </select></div>
-    </div>
-    <div class="field"><label>Due date</label><input type="date" id="new-date"></div>
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeTaskModal()">Cancel</button>
-      <button class="btn-primary" onclick="createTask()"><i class="ti ti-plus" style="font-size:14px"></i> Add task</button>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPA_URL='https://cufogvopfdruqlanxtrh.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1Zm9ndm9wZmRydXFsYW54dHJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2ODU5NjYsImV4cCI6MjA5NzI2MTk2Nn0.mFlEmud2MWW3vgQS9bGGkpGcYJeApuF3qC_F6qPy4NA';
-const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+const BLIS_WA='201217733329';
+const BLIS_EMAIL='taherabdallah3@gmail.com';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbx9HV2sGxtp6xyr2pq_Jjy-2tDSO9oyhsjfBB0iW6TvMCH9qTKX2cbE5RnKoyd0QLSA/exec';
 
-const PASSWORDS={ceo:'dalia123',emp1:'1111',emp2:'2222',emp3:'3333',emp4:'4444'};
-const NAMES={ceo:'Dalia Halawani',emp1:'Employee 1',emp2:'Employee 2',emp3:'Employee 3',emp4:'Employee 4'};
-const ROLES={ceo:'CEO',emp1:'Team member',emp2:'Team member',emp3:'Team member',emp4:'Team member'};
-const AV_COLORS={ceo:'#1C1612',emp1:'#C4956A',emp2:'#3B6D11',emp3:'#993556',emp4:'#185FA5'};
+const state={type:'',location:'',style:'',scope:'',name:'',phone:'',email:''};
+const btnMap={2:'btn1',3:'btn2',4:'btn3',5:'btn4'};
+const progMap={1:20,2:40,3:60,4:80,5:95};
+let leadFired=false;
+let captureTimer=null;
 
-let currentRole='';
-let currentFilter='all';
-let allProjects=[];
-let allTasks=[];
-let allComments=[];
-let allFiles=[];
+const directions={
+  'Contemporary minimalist':'"A curated space of refined restraint — where every element earns its place and quiet luxury speaks louder than decoration."',
+  'Modern classic':'"Timeless proportions meet contemporary living — elegant, layered, and built to stand the test of time."',
+  'Warm Mediterranean':'"Sunlight, texture, and warmth woven into every corner — a home that feels like it has always been lived in."',
+  'Bold contemporary':'"An interior with personality and intention — spaces that make a statement without ever feeling overdone."',
+  'Not sure yet':'"Great design starts with a conversation. Dalia will guide you to a direction that feels completely yours."'
+};
 
-function ini(n){return n.split(' ').slice(0,2).map(x=>x[0]).join('').toUpperCase()}
-function roleKey(name){return Object.entries(NAMES).find(([k,v])=>v===name)?.[0]||'emp1'}
-
-function showLoading(msg='Loading...'){
-  document.getElementById('loading-overlay').classList.add('show');
-  document.getElementById('loading-text').textContent=msg;
-}
-function hideLoading(){document.getElementById('loading-overlay').classList.remove('show')}
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.innerHTML=`<i class="ti ti-check" style="font-size:16px;color:var(--clay)"></i> ${msg}`;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),3000);
-}
-
-function doLogin(){
-  const role=document.getElementById('login-name').value;
-  const pass=document.getElementById('login-pass').value;
-  const err=document.getElementById('login-error');
-  if(!role){err.textContent='Please select your name.';err.style.display='block';return;}
-  if(pass!==PASSWORDS[role]){err.textContent='Incorrect password.';err.style.display='block';return;}
-  err.style.display='none';
-  launchApp(role);
-}
-function quickLogin(role){document.getElementById('login-name').value=role;document.getElementById('login-pass').value=PASSWORDS[role];launchApp(role);}
-
-async function launchApp(role){
-  currentRole=role;
-  localStorage.setItem('blis_role',role);
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').style.display='block';
-  document.getElementById('sb-name').textContent=NAMES[role];
-  document.getElementById('sb-role').textContent=ROLES[role];
-  const av=document.getElementById('sb-av');
-  av.textContent=ini(NAMES[role]);
-  av.style.background=AV_COLORS[role];
-  renderTeam();
-  await loadAll();
+function buildWAMessage(){
+  const lines=[
+    '🏠 *New BLIS Lead*',
+    '',
+    `*Name:* ${state.name}`,
+    `*Phone:* ${state.phone}`,
+    state.email ? `*Email:* ${state.email}` : null,
+    '',
+    `*Project type:* ${state.type||'Not specified'}`,
+    `*Location:* ${state.location||'Not specified'}`,
+    `*Style:* ${state.style||'Not specified'}`,
+    `*Service:* ${state.scope||'Not specified'}`,
+    '',
+    `_Submitted via BLIS Design Consultant_`
+  ].filter(l=>l!==null);
+  return encodeURIComponent(lines.join('\n'));
 }
 
-async function loadAll(){
-  showLoading('Loading projects...');
-  const [pr,ta,co,fi]=await Promise.all([
-    sb.from('projects').select('*').order('created_at'),
-    sb.from('tasks').select('*').order('created_at'),
-    sb.from('comments').select('*').order('created_at'),
-    sb.from('files').select('*').order('created_at')
-  ]);
-  allProjects=pr.data||[];
-  allTasks=ta.data||[];
-  allComments=co.data||[];
-  allFiles=fi.data||[];
-  hideLoading();
-  renderProjects();
-  updateStats();
-  if(currentRole==='ceo'){
-    const rev=allTasks.filter(t=>t.status==='review').length;
-    document.getElementById('ceo-banner-wrap').innerHTML=`
-      <div class="ceo-banner">
-        <div class="ceo-banner-text"><strong>Good morning, Dalia.</strong><span>${rev} task${rev!==1?'s':''} waiting for your review.</span></div>
-        <button class="btn-ghost btn-sm" style="color:#F5EFE6;border-color:rgba(196,149,106,.4)" onclick="filterStatus('review',document.querySelectorAll('.tab')[2])">View reviews</button>
-      </div>`;
+function fireLead(){
+  if(leadFired) return;
+  leadFired=true;
+  window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
+  const params=new URLSearchParams({
+    name:state.name,
+    phone:state.phone,
+    email:state.email||'',
+    type:state.type,
+    location:state.location,
+    style:state.style,
+    scope:state.scope
+  });
+  fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'}).catch(()=>{});
+  const el=document.getElementById('capture-confirm');
+  if(el) el.style.display='flex';
+}
+
+function openWhatsApp(){
+  window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
+}
+
+function pick(el,key,val){
+  const parent=el.closest('.opt-grid');
+  parent.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  state[key]=val;
+  const s=parseInt(document.querySelector('.step.active').id.replace('s',''));
+  const btn=btnMap[s+1];
+  if(btn) document.getElementById(btn).disabled=false;
+}
+
+function nextStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=progMap[n]+'%';
+  window.scrollTo(0,0);
+}
+
+function checkName(){
+  state.name=document.getElementById('clientName').value.trim();
+  state.phone=document.getElementById('clientPhone').value.trim();
+  state.email=document.getElementById('clientEmail').value.trim();
+  const ready=state.name&&state.phone;
+  document.getElementById('btn5').disabled=!ready;
+  if(ready&&!leadFired){
+    clearTimeout(captureTimer);
+    captureTimer=setTimeout(fireLead,1500);
   }
 }
 
-function logout(){
-  currentRole='';
-  localStorage.removeItem('blis_role');
-  document.getElementById('app').style.display='none';
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('login-pass').value='';
-  document.getElementById('login-name').value='';
+function generateBrief(){
+  if(!leadFired) fireLead();
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sLoading').classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(buildResult,2000);
 }
 
-function statusTag(s){
-  const map={todo:'tag-todo','in-progress':'tag-progress',review:'tag-review',done:'tag-done'};
-  const labels={todo:'To do','in-progress':'In progress',review:'Review',done:'Done'};
-  return `<span class="tag ${map[s]||'tag-todo'}">${labels[s]||s}</span>`;
-}
-function fileIcon(n){
-  if(n.endsWith('.pdf'))return 'ti-file-type-pdf';
-  if(n.endsWith('.zip'))return 'ti-file-zip';
-  if(n.endsWith('.xlsx')||n.endsWith('.xls'))return 'ti-file-spreadsheet';
-  return 'ti-file';
-}
-
-function renderProjects(){
-  const sel=document.getElementById('new-project');
-  if(sel)sel.innerHTML=allProjects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
-  document.getElementById('badge-proj').textContent=allProjects.filter(p=>p.status!=='done').length;
-  const filtered=allProjects.filter(p=>currentFilter==='all'||p.status===currentFilter);
-  const el=document.getElementById('project-list');
-  if(!filtered.length){el.innerHTML='<div class="empty"><i class="ti ti-inbox"></i>No projects yet</div>';return;}
-  el.innerHTML=filtered.map(proj=>{
-    const tasks=allTasks.filter(t=>t.project_id===proj.id);
-    const done=tasks.filter(t=>t.status==='done').length;
-    return `<div class="project-card" id="proj-${proj.id}">
-      <div class="project-header" onclick="toggleProject('${proj.id}')">
-        <div style="flex:1">
-          <div class="project-name">${proj.name}</div>
-          <div class="project-info">
-            <span><i class="ti ti-user" style="font-size:12px"></i> ${proj.client}</span>
-            <span><i class="ti ti-checkbox" style="font-size:12px"></i> ${done}/${tasks.length} tasks</span>
-            ${statusTag(proj.status)}
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
-          <div class="progress-wrap">
-            <div class="progress-label">${proj.progress||0}%</div>
-            <div class="progress-track"><div class="progress-fill-bar" style="width:${proj.progress||0}%"></div></div>
-          </div>
-          <i class="ti ti-chevron-down chevron" id="chev-${proj.id}"></i>
-        </div>
-      </div>
-      <div class="task-list" id="tasks-${proj.id}">
-        ${tasks.map(t=>renderTask(t,proj.id)).join('')}
-        <div style="padding:12px 20px;display:flex;gap:8px">
-          <button class="btn-ghost btn-sm" onclick="openTaskModalForProject('${proj.id}')"><i class="ti ti-plus" style="font-size:13px"></i> Add task</button>
-          ${currentRole==='ceo'?`<button class="btn-danger" onclick="deleteProject('${proj.id}')"><i class="ti ti-trash" style="font-size:12px"></i> Delete project</button>`:''}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+function buildResult(){
+  const dir=directions[state.style]||'"Dalia will craft a direction that is uniquely yours — tailored to your space, your life, and your vision."';
+  document.getElementById('result-name').textContent='For '+state.name+(state.location?' · '+state.location:'');
+  document.getElementById('result-hero').innerHTML=`<div class="result-hero-label">Design direction</div><div class="result-hero-text">${dir}</div>`;
+  document.getElementById('result-grid').innerHTML=`
+    <div class="result-card"><div class="result-label">Project type</div><div class="result-value">${state.type||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Location</div><div class="result-value">${state.location||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Style</div><div class="result-value">${state.style||'—'}</div></div>
+    <div class="result-card"><div class="result-label">Service</div><div class="result-value">${state.scope||'—'}</div></div>
+  `;
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sResult').classList.add('active');
+  document.getElementById('prog').style.width='100%';
+  window.scrollTo(0,0);
 }
 
-function renderTask(t,projId){
-  const files=allFiles.filter(f=>f.task_id===t.id);
-  const comments=allComments.filter(c=>c.task_id===t.id);
-  const fileHtml=files.length?`<div class="file-list">${files.map(f=>`
-    <a class="file-chip" href="${f.url}" target="_blank">
-      <i class="ti ${fileIcon(f.name)}"></i>${f.name}
-      <span style="color:var(--mid);font-size:10px">${f.size}</span>
-      ${currentRole==='ceo'?`<i class="ti ti-x file-del" onclick="event.preventDefault();deleteFile('${f.id}')"></i>`:''}
-    </a>`).join('')}</div>`:'';
-  const commentHtml=comments.map(c=>`
-    <div class="comment-item">
-      <div class="avatar" style="background:${c.role==='ceo'?AV_COLORS.ceo:AV_COLORS[c.role]||'#C4956A'};width:22px;height:22px;font-size:9px">${ini(c.author)}</div>
-      <div class="comment-bubble">
-        <div class="comment-author ${c.role==='ceo'?'is-ceo':''}">${c.author}${c.role==='ceo'?'<span class="ceo-tag">CEO</span>':''}</div>
-        <div class="comment-text">${c.text}</div>
-        <div class="comment-time">${new Date(c.created_at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
-      </div>
-    </div>`).join('');
-  return `<div class="task-item" id="task-${t.id}">
-    <div class="task-check ${t.status==='done'?'done':''}" onclick="toggleTask('${t.id}','${projId}')">${t.status==='done'?'<i class="ti ti-check" style="font-size:11px"></i>':''}</div>
-    <div class="task-body">
-      <div class="task-title ${t.status==='done'?'done-text':''}">${t.title}</div>
-      <div class="task-row">
-        ${statusTag(t.status)}
-        <div style="font-size:11px;color:var(--mid);display:flex;align-items:center;gap:4px">
-          <div class="avatar" style="background:${AV_COLORS[roleKey(t.assignee)]||'#C4956A'};width:20px;height:20px;font-size:9px">${ini(t.assignee||'?')}</div>${t.assignee}
-        </div>
-        <span style="font-size:11px;color:var(--mid)"><i class="ti ti-calendar" style="font-size:11px"></i> ${t.due||'TBD'}</span>
-      </div>
-      <div class="task-actions">
-        <label class="task-file-btn"><i class="ti ti-upload" style="font-size:13px"></i> Upload file<input type="file" multiple style="display:none" onchange="uploadFile(event,'${t.id}')"></label>
-        <button class="comment-btn" onclick="toggleComments('${t.id}')"><i class="ti ti-message-circle" style="font-size:13px"></i> ${comments.length||'Comment'}</button>
-        ${currentRole==='ceo'?`<button class="btn-danger" onclick="deleteTask('${t.id}','${projId}')"><i class="ti ti-trash" style="font-size:12px"></i></button>`:''}
-      </div>
-      ${fileHtml}
-      <div id="cs-${t.id}" style="display:none">
-        <div class="comments-wrap">
-          ${commentHtml}
-          <div class="comment-input-row">
-            <div class="avatar" style="background:${AV_COLORS[currentRole]};width:22px;height:22px;font-size:9px">${ini(NAMES[currentRole])}</div>
-            <textarea class="comment-input" id="ci-${t.id}" placeholder="Leave a comment..." rows="1"></textarea>
-            <button class="btn-clay btn-sm" onclick="postComment('${t.id}','${projId}')">Post</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function toggleProject(id){
-  document.getElementById('tasks-'+id).classList.toggle('open');
-  document.getElementById('chev-'+id).classList.toggle('open');
-}
-function openById(id){
-  const tl=document.getElementById('tasks-'+id);
-  if(tl&&!tl.classList.contains('open')){tl.classList.add('open');const ch=document.getElementById('chev-'+id);if(ch)ch.classList.add('open');}
-}
-function toggleComments(taskId){
-  const el=document.getElementById('cs-'+taskId);
-  if(el)el.style.display=el.style.display==='none'?'block':'none';
-}
-
-async function toggleTask(taskId,projId){
-  const task=allTasks.find(t=>t.id===taskId);
-  const newStatus=task.status==='done'?'in-progress':'done';
-  await sb.from('tasks').update({status:newStatus}).eq('id',taskId);
-  await loadAll();openById(projId);
-}
-
-async function uploadFile(e,taskId){
-  const task=allTasks.find(t=>t.id===taskId);
-  const projId=task.project_id;
-  showLoading('Uploading file...');
-  for(const f of e.target.files){
-    const path=`${taskId}/${Date.now()}_${f.name}`;
-    const {data,error}=await sb.storage.from('task-files').upload(path,f,{upsert:true});
-    if(error){hideLoading();toast('Upload failed: '+error.message);return;}
-    const {data:urlData}=sb.storage.from('task-files').getPublicUrl(path);
-    const size=f.size<1048576?(f.size/1024).toFixed(0)+' KB':(f.size/1048576).toFixed(1)+' MB';
-    await sb.from('files').insert({task_id:taskId,name:f.name,url:urlData.publicUrl,size});
-  }
-  hideLoading();toast('File uploaded');await loadAll();openById(projId);
-  setTimeout(()=>{const cs=document.getElementById('cs-'+taskId);if(cs)cs.style.display='block';},50);
-}
-
-async function deleteFile(fileId){
-  if(!confirm('Delete this file?'))return;
-  await sb.from('files').delete().eq('id',fileId);
-  toast('File removed');await loadAll();
-}
-
-async function postComment(taskId,projId){
-  const inp=document.getElementById('ci-'+taskId);
-  if(!inp||!inp.value.trim())return;
-  await sb.from('comments').insert({task_id:taskId,author:NAMES[currentRole],role:currentRole,text:inp.value.trim()});
-  toast('Comment posted');await loadAll();openById(projId);
-  setTimeout(()=>{const cs=document.getElementById('cs-'+taskId);if(cs)cs.style.display='block';},50);
-}
-
-async function deleteTask(taskId,projId){
-  if(!confirm('Delete this task?'))return;
-  await sb.from('tasks').delete().eq('id',taskId);
-  toast('Task deleted');await loadAll();openById(projId);
-}
-
-async function deleteProject(projId){
-  if(!confirm('Delete this project and all its tasks?'))return;
-  await sb.from('projects').delete().eq('id',projId);
-  toast('Project deleted');await loadAll();
-}
-
-function updateStats(){
-  document.getElementById('stat-active').textContent=allProjects.filter(p=>p.status!=='done').length;
-  document.getElementById('stat-total').textContent=allTasks.length;
-  document.getElementById('stat-done').textContent=allTasks.filter(t=>t.status==='done').length;
-  document.getElementById('stat-review').textContent=allTasks.filter(t=>t.status==='review').length;
-}
-
-function filterStatus(s,btn){
-  currentFilter=s;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  renderProjects();
-}
-
-function toggleAddProject(){
-  const f=document.getElementById('add-project-form');
-  f.style.display=f.style.display==='none'?'block':'none';
-}
-
-async function createProject(){
-  const name=document.getElementById('np-name').value.trim();
-  const client=document.getElementById('np-client').value.trim();
-  if(!name||!client)return;
-  showLoading('Creating project...');
-  await sb.from('projects').insert({name,client,status:'in-progress',progress:0});
-  document.getElementById('np-name').value='';
-  document.getElementById('np-client').value='';
-  toggleAddProject();
-  toast('Project created');
-  await loadAll();
-}
-
-function openTaskModal(){document.getElementById('task-modal').classList.add('open')}
-function openTaskModalForProject(projId){document.getElementById('new-project').value=projId;openTaskModal();}
-function closeTaskModal(){document.getElementById('task-modal').classList.remove('open')}
-function closeTaskModalOutside(e){if(e.target===document.getElementById('task-modal'))closeTaskModal();}
-
-async function createTask(){
-  const title=document.getElementById('new-title').value.trim();
-  const projId=document.getElementById('new-project').value;
-  if(!title||!projId)return;
-  showLoading('Adding task...');
-  await sb.from('tasks').insert({
-    project_id:projId,
-    title,
-    assignee:document.getElementById('new-assignee').value,
-    status:document.getElementById('new-status').value,
-    due:document.getElementById('new-date').value||null
+function restart(){
+  Object.keys(state).forEach(k=>state[k]='');
+  leadFired=false;
+  clearTimeout(captureTimer);
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  ['btn1','btn2','btn3','btn4','btn5'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.disabled=true;
   });
-  document.getElementById('new-title').value='';
-  closeTaskModal();
-  toast('Task added');
-  await loadAll();
-  openById(projId);
+  ['clientName','clientPhone','clientEmail'].forEach(id=>document.getElementById(id).value='');
+  const conf=document.getElementById('capture-confirm');
+  if(conf) conf.style.display='none';
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s1').classList.add('active');
+  document.getElementById('prog').style.width='20%';
+  window.scrollTo(0,0);
 }
-
-function showView(v,el){
-  ['projects','files','comments','team'].forEach(vv=>document.getElementById('view-'+vv).style.display='none');
-  document.getElementById('view-'+v).style.display='block';
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  if(el)el.classList.add('active');
-  if(v==='files')renderAllFiles();
-  if(v==='comments')renderAllComments();
-}
-
-function renderAllFiles(){
-  let html='';
-  allProjects.forEach(proj=>{
-    const files=allFiles.filter(f=>allTasks.find(t=>t.id===f.task_id&&t.project_id===proj.id));
-    if(!files.length)return;
-    html+=`<div style="background:#fff;border:0.5px solid var(--border);border-radius:12px;margin-bottom:14px;padding:18px 20px">
-      <div style="font-size:13px;font-weight:500;margin-bottom:12px">${proj.name}</div>
-      ${files.map(f=>`<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0E8DE">
-        <i class="ti ${fileIcon(f.name)}" style="font-size:18px;color:var(--clay)"></i>
-        <div style="flex:1"><div style="font-size:13px">${f.name}</div><div style="font-size:11px;color:var(--mid)">${f.size}</div></div>
-        <a href="${f.url}" target="_blank" class="btn-ghost btn-sm"><i class="ti ti-download" style="font-size:13px"></i> Open</a>
-      </div>`).join('')}
-    </div>`;
-  });
-  document.getElementById('all-files-list').innerHTML=html||'<div class="empty"><i class="ti ti-folder"></i>No files uploaded yet</div>';
-}
-
-function renderAllComments(){
-  let html='';
-  allProjects.forEach(proj=>{
-    const projTasks=allTasks.filter(t=>t.project_id===proj.id);
-    projTasks.forEach(t=>{
-      const comments=allComments.filter(c=>c.task_id===t.id);
-      comments.forEach(c=>{
-        html+=`<div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;margin-bottom:10px;padding:16px 18px">
-          <div style="font-size:11px;color:var(--mid);margin-bottom:8px">${proj.name} · ${t.title}</div>
-          <div style="display:flex;gap:10px">
-            <div class="avatar" style="background:${c.role==='ceo'?AV_COLORS.ceo:'#C4956A'}">${ini(c.author)}</div>
-            <div>
-              <div style="font-size:13px;font-weight:500;color:${c.role==='ceo'?'var(--clay)':'var(--dark)'}">${c.author}${c.role==='ceo'?'<span class="ceo-tag" style="margin-left:6px">CEO</span>':''}</div>
-              <div style="font-size:13px;margin-top:3px;line-height:1.5">${c.text}</div>
-              <div style="font-size:10px;color:var(--mid);margin-top:4px">${new Date(c.created_at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
-            </div>
-          </div>
-        </div>`;
-      });
-    });
-  });
-  document.getElementById('all-comments-list').innerHTML=html||'<div class="empty"><i class="ti ti-message-circle"></i>No comments yet</div>';
-}
-
-function renderTeam(){
-  document.getElementById('team-grid').innerHTML=Object.entries(NAMES).map(([k,name])=>`
-    <div style="background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:22px;text-align:center">
-      <div class="avatar" style="background:${AV_COLORS[k]};width:44px;height:44px;font-size:15px;margin:0 auto 10px">${ini(name)}</div>
-      <div style="font-weight:500;font-size:15px">${name}</div>
-      <div style="font-size:12px;color:var(--mid);margin-top:3px">${ROLES[k]}</div>
-      <div style="background:${k==='ceo'?'var(--warm)':'var(--blue-bg)'};border-radius:12px;padding:3px 12px;font-size:11px;color:${k==='ceo'?'var(--clay)':'var(--blue)'};display:inline-block;margin-top:10px">${k==='ceo'?'Admin':'Team member'}</div>
-    </div>`).join('');
-}
-
-// Auto-login if session saved
-window.addEventListener('load',()=>{
-  const saved=localStorage.getItem('blis_role');
-  if(saved&&PASSWORDS[saved])launchApp(saved);
-});
-
-// Setup Supabase storage bucket notice
-async function ensureBucket(){
-  await sb.storage.createBucket('task-files',{public:true}).catch(()=>{});
-}
-ensureBucket();
 </script>
 </body>
 </html>
