@@ -250,7 +250,7 @@ body{background:#FAF7F3;font-family:'Georgia',serif;min-height:100vh;-webkit-tap
 <script>
 const BLIS_WA='201217733329';
 const BLIS_EMAIL='taherabdallah3@gmail.com';
-const SHEET_URL='https://script.google.com/macros/s/AKfycbx9HV2sGxtp6xyr2pq_Jjy-2tDSO9oyhsjfBB0iW6TvMCH9qTKX2cbE5RnKoyd0QLSA/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxPKJjM58zPR2jBix5l7ha64aT_3DLM9ra0Y_kZdExlFtMY4N2PpTzkF_b3dlbQqORO/exec';
 
 const state={type:'',location:'',style:'',scope:'',name:'',phone:'',email:''};
 const btnMap={2:'btn1',3:'btn2',4:'btn3',5:'btn4'};
@@ -288,20 +288,16 @@ function fireLead(){
   if(leadFired) return;
   leadFired=true;
   window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
-  fetch('https://blis.app.n8n.cloud/webhook/24483bcc-717c-4dc2-afd5-2d657d835845', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      Timestamp: new Date().toISOString(),
-      Name: state.name,
-      Phone: state.phone,
-      Email: state.email || '',
-      'Project Type': state.type,
-      Location: state.location,
-      Style: state.style,
-      Service: state.scope
-    })
-  }).catch(()=>{});
+  const params=new URLSearchParams({
+    name:state.name,
+    phone:state.phone,
+    email:state.email||'',
+    type:state.type,
+    location:state.location,
+    style:state.style,
+    scope:state.scope
+  });
+  fetch('https://script.google.com/macros/s/AKfycbxPKJjM58zPR2jBix5l7ha64aT_3DLM9ra0Y_kZdExlFtMY4N2PpTzkF_b3dlbQqORO/exec?'+params.toString(),{method:'GET',mode:'no-cors'}).catch(()=>{});
   const el=document.getElementById('capture-confirm');
   if(el) el.style.display='flex';
 }
