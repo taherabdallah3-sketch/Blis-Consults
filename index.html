@@ -288,16 +288,20 @@ function fireLead(){
   if(leadFired) return;
   leadFired=true;
   window.open(`https://wa.me/${BLIS_WA}?text=${buildWAMessage()}`,'_blank');
-  const params=new URLSearchParams({
-    name:state.name,
-    phone:state.phone,
-    email:state.email||'',
-    type:state.type,
-    location:state.location,
-    style:state.style,
-    scope:state.scope
-  });
-  fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'}).catch(()=>{});
+  fetch('https://blis.app.n8n.cloud/webhook/24483bcc-717c-4dc2-afd5-2d657d835845', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      Timestamp: new Date().toISOString(),
+      Name: state.name,
+      Phone: state.phone,
+      Email: state.email || '',
+      'Project Type': state.type,
+      Location: state.location,
+      Style: state.style,
+      Service: state.scope
+    })
+  }).catch(()=>{});
   const el=document.getElementById('capture-confirm');
   if(el) el.style.display='flex';
 }
